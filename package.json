@@ -1,0 +1,12 @@
+{
+  "name": "Erik",
+  "version": "0.0.0",
+  "description": "Fun Christmas game from the fine folks at Moov2.",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/moov2/erik"
+  },
+  "author": "Moov2",
+  "devDependencies": {
+  }
+}
