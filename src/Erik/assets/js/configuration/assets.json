@@ -15,7 +15,7 @@
     {
         "name": "iceworld",
         "type": "tilemap",
-        "url": "/assets/tilemaps/simple16.json"
+        "url": "/assets/tilemaps/iceworld.json"
     },
     {
         "name": "winter-tiles-v5",

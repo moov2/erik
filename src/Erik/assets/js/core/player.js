@@ -10,8 +10,8 @@ function Player(game, connectionId, isActive, x, y, angle) {
     this.isActive = isActive;
 
     if (isActive) {
-        x = this.game.world.width / 2;
-        y = this.game.world.height / 2;
+        x = 300;
+        y = 300;
     }
 
     this.sprite = this.game.add.sprite(x, y, 'dude');

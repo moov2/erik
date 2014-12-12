@@ -31,7 +31,8 @@ Level.prototype.create = function () {
     // these indexes correspond to the tile position in the layer's tileset
     // so for example, in this case index 21 is just normal ground which we do want to be abel to walk on
     // anything NOT included in the exclusion array will be collidable I.e we can't walk through/over it
-    this.mymap.setCollisionByExclusion([21], true, 'Background');
+    this.mymap.setCollisionByExclusion([7, 8, 9, 10, 19, 20, 21, 22, 33, 34, 45, 46], true, 'Background');
+    this.mymap.setCollisionByExclusion([0, 74], true, 'terrain assets');
 };
 
 /**
