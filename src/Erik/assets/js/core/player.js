@@ -30,14 +30,14 @@ Player.prototype.reverse = function () {
  * rotates the character counter clockwise
  */
 Player.prototype.turnLeft = function () {
-    this.sprite.angle -= 4;
+    this.sprite.angle -= Config.PLAYER_ROTATION_SPEED;
 };
 
 /**
 * rotates the character clockwise
 */
 Player.prototype.turnRight = function () {
-    this.sprite.angle += 4;
+    this.sprite.angle += Config.PLAYER_ROTATION_SPEED;
 };
 
 /**
