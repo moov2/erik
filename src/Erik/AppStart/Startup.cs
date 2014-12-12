@@ -1,4 +1,5 @@
-﻿using Microsoft.Owin.Extensions;
+﻿using Microsoft.AspNet.SignalR;
+using Microsoft.Owin.Extensions;
 using Owin;
 
 namespace Erik.AppStart
@@ -8,6 +9,7 @@ namespace Erik.AppStart
         public void Configuration(IAppBuilder app)
         {
             app
+                .MapHubs(new HubConfiguration { EnableCrossDomain = true })
                 .UseNancy((options) =>
                 {
 
