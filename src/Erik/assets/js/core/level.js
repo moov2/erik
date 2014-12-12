@@ -4,9 +4,7 @@ var Config = require('../configuration/config'),
 /**
  *
  */
-function Level(gameStates) {
-    this.setup(gameStates);
-}
+function Level() { }
 
 /**
  * Configures the level environment.
@@ -18,6 +16,14 @@ Level.prototype.create = function () {
     // set up our world
     this.game.world.setBounds(0, 0, 4096, 4096);
     this.game.add.sprite(0, 0, 'backdrop');
+};
+
+/**
+ * Loads all the assets in the game.
+ */
+Level.prototype.preload = function () {
+    this.game.load.image('backdrop', '/assets/images/test_world.png');
+    this.game.load.spritesheet('dude', '/assets/images/dude.png', 32, 48);
 };
 
 /**

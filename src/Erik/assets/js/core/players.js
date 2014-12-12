@@ -3,18 +3,21 @@ var Player = require('./player');
 /**
  * Manages all the players in the game.
  */
-function Players(game) {
-    this.game = game;
-
+function Players(level) {
     // players will be added to this array.
     this.players = [];
+    this.level = level;
 }
 
 /**
  * Creates players in the environment.
  */
 Players.prototype.create = function () {
-    this.players.push(new Player(this.game));
+    if (!this.level.game) {
+        return;
+    }
+
+    this.players.push(new Player(this.level.game));
 };
 
 /**
