@@ -89,7 +89,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets\images\test_world.png" />
-    <Content Include="assets\images\topdown-1-standing.png" />
+    <Content Include="assets\images\walking.png" />
     <Content Include="assets\js\configuration\config.js" />
     <Content Include="assets\js\core\gamestate.js" />
     <Content Include="assets\js\core\level.js" />
@@ -127,7 +127,7 @@
     <Content Include="assets\Web.config" />
     <Content Include="assets\js\configuration\assets.json" />
     <Content Include="assets\Web.config" />
-    <Content Include="assets\tilemaps\simple3.json" />
+    <Content Include="assets\tilemaps\iceworld.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

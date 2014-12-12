@@ -18,9 +18,9 @@
         "url": "/assets/tilemaps/iceworld.json"
     },
     {
-        "name": "winter-tiles-v5",
+        "name": "winter-tiles-v6",
         "type": "image",
-        "url": "/assets/tilemaps/terrain/winter-tiles-v5.png"
+        "url": "/assets/tilemaps/terrain/winter-tiles-v6.png"
     },
     {
         "name": "terrain-assets",

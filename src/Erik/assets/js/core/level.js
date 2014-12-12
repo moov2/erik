@@ -20,7 +20,7 @@ Level.prototype.create = function () {
     // set the world to be the same size as the tilemap
     this.game.world.setBounds(0, 0, this.mymap.widthInPixels, this.mymap.heightInPixels);
     // add the tilesets that the tilemap uses (tilesets are basically spritesheets)
-    this.mymap.addTilesetImage('winter-tiles-v5');   // the cachekey must match the tileset "name" property in the tilemap json...
+    this.mymap.addTilesetImage('winter-tiles-v6');   // the cachekey must match the tileset "name" property in the tilemap json...
     this.mymap.addTilesetImage('terrain-assets');    // ...which must also match the image filename (without the extension)
 
     // here we create layers which correspond to the layers from the tilemap
