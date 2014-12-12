@@ -14,8 +14,8 @@ var erik = {
             create: function () {
                 _this.level.create();
 
-                // The player and its settings
-                _this.player = new Player(_this.level.game.add.sprite(_this.level.game.world.width / 2, _this.level.game.world.height / 2, 'dude'));
+
+                _this.player = new Player(_this.level.game);
 
                 _this.level.game.camera.follow(_this.player.sprite);
                 _this.cursors = _this.level.game.input.keyboard.createCursorKeys();
