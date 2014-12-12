@@ -15,22 +15,23 @@ Level.prototype.create = function () {
     this.game.physics.startSystem(Phaser.Physics.ARCADE);
 
     // set up our world
-    //this.game.world.setBounds(0, 0, Config.WORLD_WIDTH, Config.WORLD_HEIGHT);
-    //this.game.add.sprite(0, 0, 'backdrop');
-   
+    // create the tilemap using the cachekey specified in the assets.json
     this.mymap = this.game.add.tilemap('iceworld');
-    this.mymap.addTilesetImage('winter-tiles-v5');   //now we add a tilsetimage to the created map-object residing on "mymap" - the name of the tilesetimage is stored in the json file and needs to be the exact same name.. you already chose the right name in your preload function - now use this cachekey 
-    this.mymap.addTilesetImage('terrain-assets');
+    // set the world to be the same size as the tilemap
+    this.game.world.setBounds(0, 0, this.mymap.widthInPixels, this.mymap.heightInPixels);
+    // add the tilesets that the tilemap uses (tilesets are basically spritesheets)
+    this.mymap.addTilesetImage('winter-tiles-v5');   // the cachekey must match the tileset "name" property in the tilemap json...
+    this.mymap.addTilesetImage('terrain-assets');    // ...which must also match the image filename (without the extension)
 
-    //create layers - every layer needs to be initialised.. you can leave some layers out - they wont be displayed then
-    this.layermain = this.mymap.createLayer('Background');   // on "mymap" we initialise a new layer - the layer with the name "layer1"  - this needs to be the exact same name as defined in tiled - it's stored in the json file
+    // here we create layers which correspond to the layers from the tilemap
+    this.layermain = this.mymap.createLayer('Background');   // again, layer names must match that in the tilemap json file
     this.layersecondary = this.mymap.createLayer('terrain assets');
 
-    // here we activate a possible collision for all tiles on terrain assets (the index starts with 1 (first tile) so this means "collide with all tiles on the tilset that are placed on the layer)
+    // now we tell the tilemap that we want tiles in the Background layer to be collidable EXCEPT for the specified indexes
+    // these indexes correspond to the tile position in the layer's tileset
+    // so for example, in this case index 21 is just normal ground which we do want to be abel to walk on
+    // anything NOT included in the exclusion array will be collidable I.e we can't walk through/over it
     this.mymap.setCollisionByExclusion([21], true, 'Background');
-
-    //this.layerbackground.resizeWorld();
-    //this.layermain.resizeWorld();
 };
 
 /**
@@ -44,7 +45,7 @@ Level.prototype.preload = function () {
             continue;
         }
 
-        if (Assets[i].type == "tilemap") {            
+        if (Assets[i].type == 'tilemap') {            
             this.game.load.tilemap(Assets[i].name, Assets[i].url, null, Phaser.Tilemap.TILED_JSON);
             continue;
         }
