@@ -1,8 +1,4 @@
 ﻿using Nancy;
-using Nancy.ModelBinding;
-using Nancy.Security;
-using System;
-using System.IO;
 
 namespace Erik.Modules
 {

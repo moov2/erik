@@ -1,10 +1,9 @@
 ﻿using Nancy;
 using Nancy.Bootstrapper;
-using Nancy.Cryptography;
-using Nancy.Session;
+using Nancy.Conventions;
 using Nancy.TinyIoc;
 
-namespace Erik
+namespace Erik.AppStart
 {
     public class Bootstrapper : DefaultNancyBootstrapper
     {
@@ -14,6 +13,15 @@ namespace Erik
         protected override void ApplicationStartup(TinyIoCContainer container, IPipelines pipelines)
         {
 
+        }
+
+        protected override void ConfigureConventions(Nancy.Conventions.NancyConventions nancyConventions)
+        {
+            base.ConfigureConventions(nancyConventions);
+
+            Conventions.StaticContentsConventions.Add(
+                StaticContentConventionBuilder.AddDirectory("assets", "assets")
+            );
         }
 
         /// <summary>
