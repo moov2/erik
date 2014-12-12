@@ -114,6 +114,20 @@ gulp.task('browserify-dev', function() {
 });
 
 /**
+ * Watches for changes to source files while your developing in order to do special
+ * stuff that makes your life easier!
+ */
+gulp.task('watch-dev', function() {
+    // changes to JS files will trigger browserify to create bundle.
+    gulp.watch(src(paths.js + '**/*.js'), ['browserify-dev']);
+});
+
+/**
+ * Have this task running while you're doing development on Erik.
+ */
+gulp.task('development', ['browserify-dev', 'watch-dev']);
+
+/**
  * -----------------------------------------------------------------------------
  * Gulp tasks used to build a production ready version of the project.
  * -----------------------------------------------------------------------------
