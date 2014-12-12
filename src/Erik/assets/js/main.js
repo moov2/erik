@@ -1,4 +1,5 @@
-var Phaser = require('./phaser');
+var Phaser = require('./phaser'),
+    Player = require('./core/player');
 
 var erik = {
     load: function () {
@@ -19,44 +20,14 @@ var erik = {
         this.game.add.sprite(0, 0, 'backdrop');
 
         // The player and its settings
-        this.player = this.game.add.sprite(this.game.world.width / 2, this.game.world.height / 2, 'dude');
+        this.player = new Player(this.game.add.sprite(this.game.world.width / 2, this.game.world.height / 2, 'dude'));
 
-        this.game.camera.follow(this.player);
-
-        //  Our two animations, walking left and right.
-        this.player.animations.add('left', [0, 1, 2, 3], 10, true);
-        this.player.animations.add('right', [5, 6, 7, 8], 10, true);
-
+        this.game.camera.follow(this.player.sprite);
         this.cursors = this.game.input.keyboard.createCursorKeys();
     },
 
     update: function () {
-        
-        if (this.cursors.left.isDown) {
-            //  Move to the left
-            this.player.x -= 4;
-
-            this.player.animations.play('left');
-        }
-        else if (this.cursors.right.isDown) {
-            //  Move to the right
-            this.player.x += 4;
-
-            this.player.animations.play('right');
-        }
-        else if (this.cursors.up.isDown) {
-            // move up
-            this.player.y -= 4;
-        }
-        else if (this.cursors.down.isDown) {
-            // move down
-            this.player.y += 4;
-        }
-        else {
-            //  Stand still
-            this.player.animations.stop();
-            this.player.frame = 4;
-        }
+        this.player.update(this.cursors);
     }
 }
 
