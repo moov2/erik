@@ -6,7 +6,10 @@
     },
     {
         "name": "dude",
-        "type": "image",
-        "url": "/assets/images/topdown-1-standing.png"
+        "type": "spritesheet",
+        "url": "/assets/images/walking.png",
+        "frameWidth": 32,
+        "frameHeight": 32,
+        "frames": 12
     },
 ]

@@ -24,6 +24,11 @@ Level.prototype.create = function () {
  */
 Level.prototype.preload = function () {
     for (var i = 0; i < Assets.length; i++) {
+        if (Assets[i].type === 'spritesheet') {
+            this.game.load.spritesheet(Assets[i].name, Assets[i].url, Assets[i].frameWidth, Assets[i].frameHeight, Assets[i].frames);
+            continue;
+        }
+
         this.game.load[Assets[i].type](Assets[i].name, Assets[i].url);
     }
 };

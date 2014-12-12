@@ -19,6 +19,7 @@ module.exports = {
     /**
      * The speed at which a player will move.
      */
-    PLAYER_MOVEMENT_SPEED: 300,
+    PLAYER_MAX_VELOCITY: 150,
+    PLAYER_MOVEMENT_SPEED: 150,
     PLAYER_ROTATION_SPEED: 4
 };

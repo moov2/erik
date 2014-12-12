@@ -1,4 +1,4 @@
-var Config = require('../Configuration/Config'),
+var Config = require('../configuration/config'),
     Phaser = require('../phaser');
 
 /**
@@ -26,6 +26,7 @@ function Player(game, connectionId, isActive, x, y, angle) {
  */
 Player.prototype.accelerate = function () {
     this.currentSpeed = Config.PLAYER_MOVEMENT_SPEED;
+    this.walk(true);
     this.isRequiresSync = true;
 };
 
@@ -56,12 +57,18 @@ Player.prototype.turnRight = function () {
  * Sets up the player animations.
  */
 Player.prototype.setup = function () {
+    // moves the registration point to the middle of the image.
     this.sprite.anchor.setTo(0.5, 0.5);
 
     this.game.physics.enable(this.sprite);
-    this.sprite.body.drag.set(0.2);
-    this.sprite.body.maxVelocity.setTo(400, 400);
+
+    // setting drag to 5 removes an issue where the player will move slightly even
+    // though there is no input from the user.
+    this.sprite.body.drag.set(5);
+    this.sprite.body.maxVelocity.setTo(Config.PLAYER_MAX_VELOCITY, Config.PLAYER_MAX_VELOCITY);
     this.sprite.body.collideWorldBounds = true;
+
+    this.sprite.animations.add('walk');
 
     if (this.isActive) {
         this.game.camera.follow(this.sprite);
@@ -115,7 +122,27 @@ Player.prototype.update = function () {
 
     if (this.currentSpeed > 0) {
         this.movePlayer();
+    } else {
+        this.walk(false);
     }
+};
+
+/**
+ * Turns on / off the walking animation dependending on the provided flag.
+ */
+Player.prototype.walk = function (isEnabled) {
+    if (this.isEnabled === isEnabled) {
+        return;
+    }
+
+    this.isEnabled = isEnabled;
+
+    if (isEnabled) {
+        this.sprite.animations.play('walk', 20, true);
+        return;
+    }
+
+    this.sprite.animations.stop('walk', true);
 };
 
 module.exports = Player;
