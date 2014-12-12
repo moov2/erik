@@ -47,8 +47,7 @@ Player.prototype.moveUp = function () {
 Player.prototype.setup = function () {
     this.sprite.anchor.setTo(0.5, 0.5);
     this.game.physics.enable(this.sprite, Phaser.Physics.ARCADE);
-    console.log(this.sprite);
-    this.sprite.drag.set(0.2);
+    this.sprite.body.drag.set(0.2);
     this.sprite.body.maxVelocity.setTo(400, 400);
     this.sprite.body.collideWorldBounds = true;
 };
