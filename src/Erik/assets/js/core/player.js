@@ -26,6 +26,7 @@ function Player(game, connectionId, isActive, x, y, angle) {
  */
 Player.prototype.accelerate = function () {
     this.currentSpeed = Config.PLAYER_MOVEMENT_SPEED;
+    this.isRequiresSync = true;
 };
 
 /**
@@ -40,6 +41,7 @@ Player.prototype.kill = function () {
  */
 Player.prototype.turnLeft = function () {
     this.sprite.angle -= Config.PLAYER_ROTATION_SPEED;
+    this.isRequiresSync = true;
 };
 
 /**
@@ -47,6 +49,7 @@ Player.prototype.turnLeft = function () {
 */
 Player.prototype.turnRight = function () {
     this.sprite.angle += Config.PLAYER_ROTATION_SPEED;
+    this.isRequiresSync = true;
 };
 
 /**
@@ -68,6 +71,7 @@ Player.prototype.setup = function () {
 
 Player.prototype.movePlayer = function () {
     this.game.physics.arcade.velocityFromRotation(this.sprite.rotation, this.currentSpeed, this.sprite.body.velocity);
+    this.isRequiresSync = true;
 }
 
 /**

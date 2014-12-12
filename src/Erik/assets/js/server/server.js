@@ -30,14 +30,19 @@ p.setupHubsComplete = function () {
 };
 
 p.update = function () {
-	if (this.hubSetupComplete !== true){
+	if (!this.hubSetupComplete) {
 		return;
 	}
 
 	var player = this.players.getActivePlayer();
 
-	if (player) {
+	if (!player) {
+		return;
+	}
+
+	if (player.currentSpeed > 0 && player.isRequiresSync) {
 		this.gameHub.server.updatePlayerLocation(player.sprite.x, player.sprite.y, player.sprite.angle);
+		player.isRequiresSync = false;
 	}
 };
 
