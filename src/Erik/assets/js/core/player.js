@@ -1,4 +1,4 @@
-var config = require('../configuration/config');
+var Config = require('../Configuration/Config');
 
 /**
  *
@@ -21,14 +21,14 @@ Player.prototype.setup = function () {
  * Moves the character up.
  */
 Player.prototype.moveDown = function () {
-    this.sprite.y += config.MOVEMENT_STEP;
+    this.sprite.y += Config.MOVEMENT_STEP;
 };
 
 /**
  * Moves the character left.
  */
 Player.prototype.moveLeft = function () {
-    this.sprite.x -= config.MOVEMENT_STEP;
+    this.sprite.x -= Config.MOVEMENT_STEP;
     this.sprite.animations.play('left');
 };
 
@@ -36,7 +36,7 @@ Player.prototype.moveLeft = function () {
 * Moves the character left.
 */
 Player.prototype.moveRight = function () {
-    this.sprite.x += config.MOVEMENT_STEP;
+    this.sprite.x += Config.MOVEMENT_STEP;
     this.sprite.animations.play('right');
 };
 
@@ -44,7 +44,7 @@ Player.prototype.moveRight = function () {
  * Moves the character up.
  */
 Player.prototype.moveUp = function () {
-    this.sprite.y -= config.MOVEMENT_STEP;
+    this.sprite.y -= Config.MOVEMENT_STEP;
 };
 
 /**
