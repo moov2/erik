@@ -66,7 +66,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets\images\dude.png" />
+    <Content Include="assets\images\test_world.png" />
     <Content Include="assets\js\main.js" />
+    <Content Include="assets\js\phaser.js" />
     <Content Include="assets\js\vendor\phaser.min.js" />
     <Content Include="robots.txt" />
     <Content Include="index.html" />
@@ -89,7 +91,12 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="assets\css\base\" />
+    <Folder Include="assets\css\generic\" />
+    <Folder Include="assets\css\helpers\" />
+    <Folder Include="assets\css\vendor\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
