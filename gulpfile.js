@@ -110,6 +110,7 @@ gulp.task('default', []);
 gulp.task('browserify-dev', function() {
     return browserify(src(paths.js + 'main.js'))
             .bundle()
+            .on('error', handleError)
             .pipe(source('erik.js'))
             .pipe(gulp.dest(src(paths.js)));
 });
