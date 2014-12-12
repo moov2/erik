@@ -32,7 +32,7 @@ Level.prototype.preload = function () {
  * Creates a new instance of a Phaser game.
  */
 Level.prototype.setup = function (gameStates) {
-    this.game = new Phaser.Game(Config.CANVAS_WIDTH, Config.CANVAS_HEIGHT, Phaser.AUTO, '', gameStates);
+    this.game = new Phaser.Game(Config.CANVAS_WIDTH, Config.CANVAS_HEIGHT, Phaser.AUTO, Config.DOM_ID, gameStates);
 };
 
 
