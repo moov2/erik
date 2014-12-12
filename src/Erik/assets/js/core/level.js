@@ -15,7 +15,7 @@ Level.prototype.create = function () {
     this.game.physics.startSystem(Phaser.Physics.ARCADE);
 
     // set up our world
-    this.game.world.setBounds(0, 0, 4096, 4096);
+    this.game.world.setBounds(0, 0, Config.WORLD_WIDTH, Config.WORLD_HEIGHT);
     this.game.add.sprite(0, 0, 'backdrop');
 };
 
