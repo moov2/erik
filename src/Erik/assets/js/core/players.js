@@ -95,6 +95,7 @@ Players.prototype.removeByConnectionId = function (connectionId) {
  */
 Players.prototype.update = function () {
     for (var i = 0; i < this.players.length; i++) {
+        this.level.game.physics.arcade.collide(this.players[i].sprite, this.level.layermain);
         this.players[i].update();
     }
 };

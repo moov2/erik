@@ -122,6 +122,7 @@ gulp.task('browserify-dev', function() {
 gulp.task('watch-dev', function() {
     // changes to JS files will trigger browserify to create bundle.
     gulp.watch(src(paths.js + '**/*.js'), ['browserify-dev']);
+    gulp.watch(src(paths.js + '**/*.json'), ['browserify-dev']);
 });
 
 /**

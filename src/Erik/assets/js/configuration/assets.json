@@ -12,4 +12,19 @@
         "frameHeight": 32,
         "frames": 12
     },
+    {
+        "name": "iceworld",
+        "type": "tilemap",
+        "url": "/assets/tilemaps/simple16.json"
+    },
+    {
+        "name": "winter-tiles-v5",
+        "type": "image",
+        "url": "/assets/tilemaps/terrain/winter-tiles-v5.png"
+    },
+    {
+        "name": "terrain-assets",
+        "type": "image",
+        "url": "/assets/tilemaps/terrain/terrain-assets.png"
+    }
 ]
