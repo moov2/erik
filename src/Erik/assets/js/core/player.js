@@ -16,14 +16,14 @@ function Player(game) {
  * Moves the character forwards.
  */
 Player.prototype.accelerate = function () {
-    this.currentSpeed = Config.MOVEMENT_SPEED;
+    this.currentSpeed = Config.PLAYER_MOVEMENT_SPEED;
 };
 
 /**
  * Moves the character backwards.
  */
 Player.prototype.reverse = function () {
-    this.currentSpeed = Config.MOVEMENT_SPEED*-1;
+    this.currentSpeed = Config.PLAYER_MOVEMENT_SPEED * -1;
 };
 
 /**
@@ -86,7 +86,7 @@ Player.prototype.update = function (cursors) {
     if (!cursors.done && (this.currentSpeed > 0)) {
         this.currentSpeed -= 4;
     }
-
+    
     if (this.currentSpeed > 0) {
         this.movePlayer();
     }
