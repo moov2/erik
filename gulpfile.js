@@ -158,7 +158,7 @@ gulp.task('intermediate', ['clean'], function () {
     gulp.src([src(paths.js + '/vendor/phaser.min.js')])
         .pipe(gulp.dest(intermediate(paths.js + '/vendor')));
 
-    return gulp.src(['src/**/*', '!**/bin/**', '!**/obj/**', '!**/*.user', '!**/*.css', '!**/*.js'])
+    return gulp.src(['src/**/*', '!**/bin/**', '!**/obj/**', '!**/*.user', '!**/*.js'])
         .pipe(gulp.dest(intermediate()));
 });
 
