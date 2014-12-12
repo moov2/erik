@@ -6,6 +6,7 @@ var erik = {
     },
 
     preload: function () {
+        this.game.load.image('backdrop', '/assets/images/test_world.png');
         this.game.load.spritesheet('dude', '/assets/images/dude.png', 32, 48);
     },
 
@@ -13,14 +14,14 @@ var erik = {
         //  We're going to be using physics, so enable the Arcade Physics system
         this.game.physics.startSystem(Phaser.Physics.ARCADE);
 
+        // set up our world (should be 4096x4096 for test image but there's possibly some limitation on this)
+        this.game.world.setBounds(0, 0, 1600, 1600);
+        this.game.add.sprite(0, 0, 'backdrop');
+
         // The player and its settings
-        this.player = this.game.add.sprite(32, this.game.world.height - 150, 'dude');
+        this.player = this.game.add.sprite(this.game.world.width / 2, this.game.world.height / 2, 'dude');
 
-        //  We need to enable physics on the player
-        this.game.physics.arcade.enable(this.player);
-
-        //  Player physics properties.
-        this.player.body.collideWorldBounds = true;
+        this.game.camera.follow(this.player);
 
         //  Our two animations, walking left and right.
         this.player.animations.add('left', [0, 1, 2, 3], 10, true);
@@ -30,24 +31,30 @@ var erik = {
     },
 
     update: function () {
-        this.player.body.velocity.x = 0;
-
+        
         if (this.cursors.left.isDown) {
             //  Move to the left
-            this.player.body.velocity.x = -150;
+            this.player.x -= 4;
 
             this.player.animations.play('left');
         }
         else if (this.cursors.right.isDown) {
             //  Move to the right
-            this.player.body.velocity.x = 150;
+            this.player.x += 4;
 
             this.player.animations.play('right');
+        }
+        else if (this.cursors.up.isDown) {
+            // move up
+            this.player.y -= 4;
+        }
+        else if (this.cursors.down.isDown) {
+            // move down
+            this.player.y += 4;
         }
         else {
             //  Stand still
             this.player.animations.stop();
-
             this.player.frame = 4;
         }
     }
