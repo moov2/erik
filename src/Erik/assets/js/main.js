@@ -14,8 +14,8 @@ var erik = {
         //  We're going to be using physics, so enable the Arcade Physics system
         this.game.physics.startSystem(Phaser.Physics.ARCADE);
 
-        // set up our world (should be 4096x4096 for test image but there's possibly some limitation on this)
-        this.game.world.setBounds(0, 0, 1600, 1600);
+        // set up our world
+        this.game.world.setBounds(0, 0, 4096, 4096);
         this.game.add.sprite(0, 0, 'backdrop');
 
         // The player and its settings
