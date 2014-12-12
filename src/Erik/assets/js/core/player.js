@@ -10,14 +10,6 @@ function Player(sprite) {
 }
 
 /**
- * Sets up the player animations.
- */
-Player.prototype.setup = function () {
-    this.sprite.animations.add('left', [0, 1, 2, 3], 10, true);
-    this.sprite.animations.add('right', [5, 6, 7, 8], 10, true);
-};
-
-/**
  * Moves the character up.
  */
 Player.prototype.moveDown = function () {
@@ -45,6 +37,14 @@ Player.prototype.moveRight = function () {
  */
 Player.prototype.moveUp = function () {
     this.sprite.y -= Config.MOVEMENT_STEP;
+};
+
+/**
+ * Sets up the player animations.
+ */
+Player.prototype.setup = function () {
+    this.sprite.animations.add('left', [0, 1, 2, 3], 10, true);
+    this.sprite.animations.add('right', [5, 6, 7, 8], 10, true);
 };
 
 /**
