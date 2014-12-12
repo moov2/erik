@@ -1,34 +1,27 @@
-var config = require('../configuration/config');
+var Config = require('../Configuration/Config');
 
 /**
  *
  */
-function Player(sprite) {
-    this.sprite = sprite;
+function Player(game) {
+    this.game = game;
+    this.sprite = this.game.add.sprite(this.game.world.width / 2, this.game.world.height / 2, 'dude');
 
     this.setup();
 }
 
 /**
- * Sets up the player animations.
- */
-Player.prototype.setup = function () {
-    this.sprite.animations.add('left', [0, 1, 2, 3], 10, true);
-    this.sprite.animations.add('right', [5, 6, 7, 8], 10, true);
-};
-
-/**
- * Moves the character up.
+ * Moves the character forwards.
  */
 Player.prototype.moveDown = function () {
-    this.sprite.y += config.MOVEMENT_STEP;
+    this.sprite.y += Config.MOVEMENT_STEP;
 };
 
 /**
  * Moves the character left.
  */
 Player.prototype.moveLeft = function () {
-    this.sprite.x -= config.MOVEMENT_STEP;
+    this.sprite.x -= Config.MOVEMENT_STEP;
     this.sprite.animations.play('left');
 };
 
@@ -36,7 +29,7 @@ Player.prototype.moveLeft = function () {
 * Moves the character left.
 */
 Player.prototype.moveRight = function () {
-    this.sprite.x += config.MOVEMENT_STEP;
+    this.sprite.x += Config.MOVEMENT_STEP;
     this.sprite.animations.play('right');
 };
 
@@ -44,7 +37,18 @@ Player.prototype.moveRight = function () {
  * Moves the character up.
  */
 Player.prototype.moveUp = function () {
-    this.sprite.y -= config.MOVEMENT_STEP;
+    this.sprite.y -= Config.MOVEMENT_STEP;
+};
+
+/**
+ * Sets up the player animations.
+ */
+Player.prototype.setup = function () {
+    this.sprite.anchor.setTo(0.5, 0.5);
+    this.game.physics.enable(this.sprite);
+    this.sprite.body.drag.set(0.2);
+    this.sprite.body.maxVelocity.setTo(400, 400);
+    this.sprite.body.collideWorldBounds = true;
 };
 
 /**
