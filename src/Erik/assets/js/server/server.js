@@ -1,6 +1,7 @@
 var $ = require('../jquery');
 
-function Server () {
+function Server (players) {
+	this.players = players;
 	this.initialise();
 }
 
@@ -24,12 +25,14 @@ p.setupHubsComplete = function () {
 	this.hubSetupComplete = true;
 };
 
-p.update = function (player) {
+p.update = function () {
 	if(this.hubSetupComplete !== true){
-		console.log("can't update, hub setup not complete");
+		// can't update, hub setup not complete
 		return;
 	}
-	this.defaultHub.server.updatePlayerLocation(0, player.sprite.x, player.sprite.y);
+	for(var i = 0; i < this.players.players.length; i++){
+		this.defaultHub.server.updatePlayerLocation(0, this.players.players[i].sprite.x, this.players.players[i].sprite.y);
+	}
 };
 
 module.exports = Server;
