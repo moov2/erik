@@ -9,7 +9,6 @@ function Player(game) {
     this.sprite = this.game.add.sprite(this.game.world.width / 2, this.game.world.height / 2, 'dude');
     this.sprite.anchor.setTo(0.5, 0.5);
     this.currentSpeed = 0;
-
     this.setup();
 }
 
@@ -18,13 +17,6 @@ function Player(game) {
  */
 Player.prototype.accelerate = function () {
     this.currentSpeed = Config.PLAYER_MOVEMENT_SPEED;
-};
-
-/**
- * Moves the character backwards.
- */
-Player.prototype.reverse = function () {
-    this.currentSpeed = Config.PLAYER_MOVEMENT_SPEED * -1;
 };
 
 /**
@@ -84,11 +76,7 @@ Player.prototype.update = function () {
         this.accelerate();
     }
 
-    if (this.cursors.down.isDown) {
-        this.reverse();
-    }
-
-    if (!this.cursors.done && (this.currentSpeed > 0)) {
+    if (!this.cursors.isDown && (this.currentSpeed > 0)) {
         this.currentSpeed -= 4;
     }
 

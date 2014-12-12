@@ -1,0 +1,23 @@
+html,
+body {
+    height: 100%;
+    margin: 0;
+    width: 100%;
+}
+
+.game-holder {
+    display: table;
+    height: 100%;
+    width: 100%;
+}
+
+.game {
+    display: table-cell;
+    vertical-align: middle;
+    width: 100%;
+}
+
+canvas {
+    margin-left: auto;
+    margin-right: auto;
+}

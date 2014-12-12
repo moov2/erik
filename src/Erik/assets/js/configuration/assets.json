@@ -1,0 +1,12 @@
+[
+    {
+        "name": "backdrop",
+        "type": "image",
+        "url": "/assets/images/test_world.png"
+    },
+    {
+        "name": "dude",
+        "type": "image",
+        "url": "/assets/images/topdown-1-standing.png"
+    },
+]

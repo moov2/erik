@@ -42,12 +42,6 @@ intermediate/
 
 node_modules/
 
-# CSS related files.
-
-.sass-cache/
-*.css
-*.map
-
 # Bundled JS file that is created by browserify gulp task.
 
 erik.js

@@ -91,8 +91,12 @@
     <Content Include="assets\images\test_world.png" />
     <Content Include="assets\images\topdown-1-standing.png" />
     <Content Include="assets\js\configuration\config.js" />
+    <Content Include="assets\js\core\gamestate.js" />
+    <Content Include="assets\js\core\level.js" />
     <Content Include="assets\js\core\player.js" />
+    <Content Include="assets\js\core\players.js" />
     <Content Include="assets\js\erik.js" />
+    <Content Include="assets\js\jquery.js" />
     <Content Include="assets\js\main.js" />
     <Content Include="assets\js\phaser.js" />
     <Content Include="assets\js\server\server.js" />
@@ -123,6 +127,7 @@
     <Content Include="assets\tilemaps\test1\testing-a.json" />
     <Content Include="assets\tilemaps\test1\tileset\desktop.ini" />
     <Content Include="assets\tilemaps\test1\tileset\Thumbs.db" />
+    <Content Include="assets\js\configuration\assets.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
