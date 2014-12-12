@@ -6,7 +6,6 @@
 
 var gulp = require('gulp');
 
-
 /**
  * -----------------------------------------------------------------------------
  * Load plug-ins used throughout the build process.
@@ -17,7 +16,9 @@ var gulp = require('gulp');
         rimraf = require('gulp-rimraf'),
         es = require('event-stream'),
         gulpReplace = require('gulp-replace'),
-        replace = require('replace');
+        replace = require('replace'),
+        browserify = require('browserify'),
+        source = require('vinyl-source-stream');
 
 
 /**
@@ -33,7 +34,8 @@ var paths = {
     solution: 'Erik.sln',
     src: './src/',
     intermediate: './intermediate/',
-    release: './dist/'
+    release: './dist/',
+    js: 'Erik/assets/js/'
 }
 
 /**
@@ -102,6 +104,16 @@ var handleError = function (err) {
 gulp.task('default', []);
 
 /**
+ * Creates a browserify bundle.
+ */
+gulp.task('browserify-dev', function() {
+    return browserify(src(paths.js + 'main.js'))
+            .bundle()
+            .pipe(source('erik.js'))
+            .pipe(gulp.dest(src(paths.js)));
+});
+
+/**
  * -----------------------------------------------------------------------------
  * Gulp tasks used to build a production ready version of the project.
  * -----------------------------------------------------------------------------
@@ -142,7 +154,7 @@ gulp.task('build', ['intermediate'], function() {
 });
 
 /**
- * Copies src files into a distribution directory.
+ * Copies the solution build files into a distribution directory.
  */
 gulp.task('copy', ['build'], function () {
     return gulp.src([intermediate('Erik/**/*'), '!**/obj/**/*', '!**/*.csproj', '!**/*.cs', '!**/packages.config'])
