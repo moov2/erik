@@ -1,4 +1,5 @@
-var Config = require('../Configuration/Config');
+var Config = require('../Configuration/Config'),
+    Phaser = require('../phaser');
 
 /**
  *
@@ -37,10 +38,14 @@ Player.prototype.turnRight = function () {
  */
 Player.prototype.setup = function () {
     this.sprite.anchor.setTo(0.5, 0.5);
+
     this.game.physics.enable(this.sprite);
     this.sprite.body.drag.set(0.2);
     this.sprite.body.maxVelocity.setTo(400, 400);
     this.sprite.body.collideWorldBounds = true;
+
+    this.game.camera.follow(this.sprite);
+    this.cursors = this.game.input.keyboard.createCursorKeys();
 };
 
 Player.prototype.movePlayer = function () {
@@ -56,25 +61,25 @@ Player.prototype.still = function () {
 /**
  * Updates the player.
  */
-Player.prototype.update = function (cursors) {
-    var isMoving = cursors.left.isDown || cursors.right.isDown || cursors.up.isDown || cursors.down.isDown;
+Player.prototype.update = function () {
+    var isMoving = this.cursors.left.isDown || this.cursors.right.isDown || this.cursors.up.isDown || this.cursors.down.isDown;
 
-    if (cursors.left.isDown) {
+    if (this.cursors.left.isDown) {
         this.turnLeft();
     }
 
-    if (cursors.right.isDown) {
+    if (this.cursors.right.isDown) {
         this.turnRight();
     }
 
-    if (cursors.up.isDown) {
+    if (this.cursors.up.isDown) {
         this.accelerate();
     }
 
-    if (!cursors.done && (this.currentSpeed > 0)) {
+    if (!this.cursors.isDown && (this.currentSpeed > 0)) {
         this.currentSpeed -= 4;
     }
-    
+
     if (this.currentSpeed > 0) {
         this.movePlayer();
     }

@@ -1,6 +1,12 @@
 module.exports = {
     /**
-     * The speed at which a player will move
+     * Dimensions of the game.
+     */
+    CANVAS_HEIGHT: 600,
+    CANVAS_WIDTH: 800,
+
+    /**
+     * The speed at which a player will move.
      */
     PLAYER_MOVEMENT_SPEED: 300,
     PLAYER_ROTATION_SPEED: 4

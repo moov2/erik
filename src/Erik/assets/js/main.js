@@ -1,34 +1,15 @@
-var Phaser = require('./phaser'),
-    Player = require('./core/player');
+var GameState = require('./core/gamestate'),
+    Level = require('./core/level'),
+    Players = require('./core/players');
 
 var erik = {
     load: function () {
-        this.game = new Phaser.Game(800, 600, Phaser.AUTO, '', { preload: this.preload, create: this.create, update: this.update });
-    },
+        this.level = new Level();
+        this.players = new Players(this.level);
+        this.state = new GameState([this.level, this.players]);
 
-    preload: function () {
-        this.game.load.image('backdrop', '/assets/images/test_world.png');
-        this.game.load.image('dude', '/assets/images/topdown-1-standing.png');
-    },
-
-    create: function () {
-        //  We're going to be using physics, so enable the Arcade Physics system
-        this.game.physics.startSystem(Phaser.Physics.ARCADE);
-
-        // set up our world
-        this.game.world.setBounds(0, 0, 4096, 4096);
-        this.game.add.sprite(0, 0, 'backdrop');
-
-        // The player and its settings
-        this.player = new Player(this.game);
-
-        this.game.camera.follow(this.player.sprite);
-        this.cursors = this.game.input.keyboard.createCursorKeys();
-    },
-
-    update: function () {
-        this.player.update(this.cursors);
+        this.level.setup(this.state);
     }
-}
+};
 
 erik.load();
