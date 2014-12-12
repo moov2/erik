@@ -153,12 +153,12 @@ gulp.task('intermediate', ['clean'], function () {
     gulp.src([src('.nuget/**/*')])
         .pipe(gulp.dest(intermediate('.nuget/')));
 
-    // copy phaser across as this is loaded seperately from the distributable JS
-    // file that is created by browserify.
-    gulp.src([src(paths.js + '/vendor/phaser.min.js')])
+    // copy libraries across as these are loaded seperately from the distributable
+    // JS file that is created by browserify.
+    gulp.src([src(paths.js + '/vendor/**/*.js')])
         .pipe(gulp.dest(intermediate(paths.js + '/vendor')));
 
-    return gulp.src(['src/**/*', '!**/bin/**', '!**/obj/**', '!**/*.user', '!**/*.js'])
+    return gulp.src(['src/**/*', '!**/bin/**', '!**/obj/**', '!**/*.user', '!**/*.js', '!**/js/**/*.json'])
         .pipe(gulp.dest(intermediate()));
 });
 
