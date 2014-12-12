@@ -9,7 +9,7 @@ namespace Erik.AppStart
         public void Configuration(IAppBuilder app)
         {
             app
-                .MapSignalR()
+                .MapSignalR(new HubConfiguration { })
                 .UseNancy((options) =>
                 {
 

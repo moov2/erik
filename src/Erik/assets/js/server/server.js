@@ -2,10 +2,13 @@ var $ = require('../jquery');
 
 function Server (players) {
 	this.players = players;
-	this.initialise();
 }
 
 var p = Server.prototype = {};
+
+p.create = function () {
+	this.initialise();
+};
 
 p.initialise = function () {
 	this.hubSetupComplete = false;
@@ -13,25 +16,27 @@ p.initialise = function () {
 };
 
 p.setupHubs = function () {
-	var _this = this;
-	this.defaultHub = $.connection.defaultHub;
+	this.gameHub = $.connection.gameHub;
 
-	$.connection.hub.start().done(function () {
-		_this.setupHubsComplete();
-	});
+	this.gameHub.client.updatePositions = $.proxy(this.players.sync, this.players);
+
+	$.connection.hub.start().done($.proxy(this.setupHubsComplete, this));
 };
 
 p.setupHubsComplete = function () {
 	this.hubSetupComplete = true;
+	this.players.activeConnectionId = this.gameHub.connection.id;
 };
 
 p.update = function () {
-	if(this.hubSetupComplete !== true){
-		// can't update, hub setup not complete
+	if (this.hubSetupComplete !== true){
 		return;
 	}
-	for(var i = 0; i < this.players.players.length; i++){
-		this.defaultHub.server.updatePlayerLocation(0, this.players.players[i].sprite.x, this.players.players[i].sprite.y);
+
+	var player = this.players.getActivePlayer();
+
+	if (player) {
+		this.gameHub.server.updatePlayerLocation(player.sprite.x, player.sprite.y, player.sprite.angle);
 	}
 };
 

@@ -4,9 +4,18 @@ var Config = require('../Configuration/Config'),
 /**
  *
  */
-function Player(game) {
+function Player(game, connectionId, isActive, x, y, angle) {
     this.game = game;
-    this.sprite = this.game.add.sprite(this.game.world.width / 2, this.game.world.height / 2, 'dude');
+    this.connectionId = connectionId;
+    this.isActive = isActive;
+
+    if (isActive) {
+        x = this.game.world.width / 2;
+        y = this.game.world.height / 2;
+    }
+
+    this.sprite = this.game.add.sprite(x, y, 'dude');
+    this.sprite.angle = angle;
     this.sprite.anchor.setTo(0.5, 0.5);
     this.currentSpeed = 0;
     this.setup();
@@ -44,8 +53,10 @@ Player.prototype.setup = function () {
     this.sprite.body.maxVelocity.setTo(400, 400);
     this.sprite.body.collideWorldBounds = true;
 
-    this.game.camera.follow(this.sprite);
-    this.cursors = this.game.input.keyboard.createCursorKeys();
+    if (this.isActive) {
+        this.game.camera.follow(this.sprite);
+        this.cursors = this.game.input.keyboard.createCursorKeys();
+    }
 };
 
 Player.prototype.movePlayer = function () {
@@ -59,9 +70,22 @@ Player.prototype.still = function () {
 };
 
 /**
+ * Moves character to position provided.
+ */
+Player.prototype.sync = function (posX, posY, angle) {
+    this.sprite.x = posX;
+    this.sprite.y = posY;
+    this.sprite.angle = angle;
+};
+
+/**
  * Updates the player.
  */
 Player.prototype.update = function () {
+    if (!this.cursors) {
+        return;
+    }
+
     if (this.cursors.left.isDown) {
         this.turnLeft();
     }

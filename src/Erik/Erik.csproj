@@ -116,10 +116,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppStart\Bootstrapper.cs" />
-    <Compile Include="Hubs\DefaultHub.cs" />
+    <Compile Include="Server\Game.cs" />
+    <Compile Include="Server\GameHub.cs" />
     <Compile Include="Modules\DefaultModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="AppStart\Startup.cs" />
+    <Compile Include="Server\GameObjects\Player.cs" />
+    <Compile Include="Server\Utils\HighFrequencyTimer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
