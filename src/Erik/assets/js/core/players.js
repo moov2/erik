@@ -49,6 +49,19 @@ Players.prototype.getByConnectionId = function (connectionId) {
     return undefined;
 };
 
+/**
+ * Returns the index of the player with a matching connection id.
+ */
+Players.prototype.getIndexByConnectionId = function (connectionId) {
+    for (var i = 0; i < this.players.length; i++) {
+        if (this.players[i].connectionId === connectionId) {
+            return i
+        }
+    }
+
+    return undefined;
+};
+
 Players.prototype.sync = function (players) {
     for (var i = 0; i < players.length; i++) {
         var player = this.getByConnectionId(players[i].ConnectionId);
@@ -61,6 +74,19 @@ Players.prototype.sync = function (players) {
         if (!player.isActive) {
             player.sync(players[i].X, players[i].Y, players[i].Angle);
         }
+    }
+};
+
+/**
+ * Removes a player by their connection id.
+ */
+Players.prototype.removeByConnectionId = function (connectionId) {
+    var index = this.getIndexByConnectionId(connectionId),
+        player = this.players[index];
+
+    if (player) {
+        this.players.splice(index, 1);
+        player.kill();
     }
 };
 

@@ -29,6 +29,13 @@ Player.prototype.accelerate = function () {
 };
 
 /**
+ * Removes the player from the game.
+ */
+Player.prototype.kill = function () {
+    this.sprite.kill();
+};
+
+/**
  * rotates the character counter clockwise
  */
 Player.prototype.turnLeft = function () {

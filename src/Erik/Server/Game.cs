@@ -50,6 +50,7 @@ namespace Erik.Server
 
         public void RemovePlayer(string connectionId) {
             Players.Remove(Players.Where(x => x.ConnectionId == connectionId).SingleOrDefault());
+            GetContext().Clients.All.RemovePlayer(connectionId);
         }
 
         public void UpdatePlayer(string connectionId, double posX, double posY, double angle)

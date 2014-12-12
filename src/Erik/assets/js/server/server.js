@@ -19,6 +19,7 @@ p.setupHubs = function () {
 	this.gameHub = $.connection.gameHub;
 
 	this.gameHub.client.updatePositions = $.proxy(this.players.sync, this.players);
+	this.gameHub.client.removePlayer = $.proxy(this.players.removeByConnectionId, this.players);
 
 	$.connection.hub.start().done($.proxy(this.setupHubsComplete, this));
 };
