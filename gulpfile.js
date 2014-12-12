@@ -6,7 +6,6 @@
 
 var gulp = require('gulp');
 
-
 /**
  * -----------------------------------------------------------------------------
  * Load plug-ins used throughout the build process.
@@ -17,7 +16,10 @@ var gulp = require('gulp');
         rimraf = require('gulp-rimraf'),
         es = require('event-stream'),
         gulpReplace = require('gulp-replace'),
-        replace = require('replace');
+        replace = require('replace'),
+        browserify = require('browserify'),
+        source = require('vinyl-source-stream'),
+        uglify = require('gulp-uglify');
 
 
 /**
@@ -33,7 +35,8 @@ var paths = {
     solution: 'Erik.sln',
     src: './src/',
     intermediate: './intermediate/',
-    release: './dist/'
+    release: './dist/',
+    js: 'Erik/assets/js/'
 }
 
 /**
@@ -102,6 +105,30 @@ var handleError = function (err) {
 gulp.task('default', []);
 
 /**
+ * Creates a browserify bundle.
+ */
+gulp.task('browserify-dev', function() {
+    return browserify(src(paths.js + 'main.js'))
+            .bundle()
+            .pipe(source('erik.js'))
+            .pipe(gulp.dest(src(paths.js)));
+});
+
+/**
+ * Watches for changes to source files while your developing in order to do special
+ * stuff that makes your life easier!
+ */
+gulp.task('watch-dev', function() {
+    // changes to JS files will trigger browserify to create bundle.
+    gulp.watch(src(paths.js + '**/*.js'), ['browserify-dev']);
+});
+
+/**
+ * Have this task running while you're doing development on Erik.
+ */
+gulp.task('development', ['browserify-dev', 'watch-dev']);
+
+/**
  * -----------------------------------------------------------------------------
  * Gulp tasks used to build a production ready version of the project.
  * -----------------------------------------------------------------------------
@@ -122,11 +149,35 @@ gulp.task('clean', function () {
 gulp.task('intermediate', ['clean'], function () {
     // for some reason gulp doesn't copy the .nuget directory so have to do this
     // in a separate copy.
-    gulp.src(['src/.nuget/**/*'])
+    gulp.src([src('.nuget/**/*')])
         .pipe(gulp.dest(intermediate('.nuget/')));
+
+    // copy phaser across as this is loaded seperately from the distributable JS
+    // file that is created by browserify.
+    gulp.src([src(paths.js + '/vendor/phaser.min.js')])
+        .pipe(gulp.dest(intermediate(paths.js + '/vendor')));
 
     return gulp.src(['src/**/*', '!**/bin/**', '!**/obj/**', '!**/*.user', '!**/*.css', '!**/*.js'])
         .pipe(gulp.dest(intermediate()));
+});
+
+/**
+ * Bundles the JS modules together into a single file.
+ */
+gulp.task('browserify', ['clean'], function () {
+    return browserify(src(paths.js + 'main.js'))
+        .bundle()
+        .pipe(source('erik.js'))
+        .pipe(gulp.dest(intermediate(paths.js)));
+});
+
+/**
+ * Compresses the single file.
+ */
+gulp.task('uglify', ['browserify'], function () {
+    gulp.src(intermediate(paths.js + 'erik.js'))
+        .pipe(uglify())
+        .pipe(gulp.dest(release('/assets/js/')))
 });
 
 /**
@@ -142,10 +193,10 @@ gulp.task('build', ['intermediate'], function() {
 });
 
 /**
- * Copies src files into a distribution directory.
+ * Copies the solution build files into a distribution directory.
  */
 gulp.task('copy', ['build'], function () {
-    return gulp.src([intermediate('Erik/**/*'), '!**/obj/**/*', '!**/*.csproj', '!**/*.cs', '!**/packages.config'])
+    return gulp.src([intermediate('Erik/**/*'), '!**/obj/**/*', '!**/*.csproj', '!**/*.cs', '!**/erik.js', '!**/packages.config'])
                    .pipe(excludeEmptyDirs(es))
                    .pipe(gulp.dest(release()));
 });
@@ -170,4 +221,4 @@ gulp.task('tidy', ['replace'], function () {
 /**
  * Task handles created a production ready version of the project.
  */
-gulp.task('dist', ['clean', 'intermediate', 'build', 'copy', 'replace', 'tidy'])
+gulp.task('dist', ['clean', 'intermediate', 'browserify', 'build', 'copy', 'uglify', 'replace', 'tidy'])

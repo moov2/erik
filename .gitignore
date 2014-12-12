@@ -47,3 +47,7 @@ node_modules/
 .sass-cache/
 *.css
 *.map
+
+# Bundled JS file that is created by browserify gulp task.
+
+erik.js
