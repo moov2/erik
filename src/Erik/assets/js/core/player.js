@@ -62,8 +62,6 @@ Player.prototype.still = function () {
  * Updates the player.
  */
 Player.prototype.update = function () {
-    var isMoving = this.cursors.left.isDown || this.cursors.right.isDown || this.cursors.up.isDown || this.cursors.down.isDown;
-
     if (this.cursors.left.isDown) {
         this.turnLeft();
     }
