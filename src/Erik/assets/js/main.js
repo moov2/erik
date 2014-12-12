@@ -1,6 +1,5 @@
-var Phaser = require('./phaser'),
-    Level = require('./core/level');
-    Player = require('./core/player');
+var Level = require('./core/level'),
+    Players = require('./core/players');
 
 var erik = {
     load: function () {
@@ -10,13 +9,15 @@ var erik = {
             preload: function () {
                 _this.level.game.load.image('backdrop', '/assets/images/test_world.png');
                 _this.level.game.load.spritesheet('dude', '/assets/images/dude.png', 32, 48);
+
+                _this.players = new Players(_this.level.game);
             },
             create: function () {
                 _this.level.create();
-                _this.player = new Player(_this.level.game);
+                _this.players.create();
             },
             update: function () {
-                _this.player.update();
+                _this.players.update();
             }
         });
     }

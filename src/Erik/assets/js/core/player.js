@@ -51,7 +51,7 @@ Player.prototype.setup = function () {
     this.sprite.body.maxVelocity.setTo(400, 400);
     this.sprite.body.collideWorldBounds = true;
 
-    this.game.camera.follow(_this.player.sprite);
+    this.game.camera.follow(this.sprite);
     this.cursors = this.game.input.keyboard.createCursorKeys();
 };
 
