@@ -13,15 +13,10 @@ var erik = {
             },
             create: function () {
                 _this.level.create();
-
-
                 _this.player = new Player(_this.level.game);
-
-                _this.level.game.camera.follow(_this.player.sprite);
-                _this.cursors = _this.level.game.input.keyboard.createCursorKeys();
             },
             update: function () {
-                _this.player.update(_this.cursors);
+                _this.player.update();
             }
         });
     }

@@ -50,6 +50,9 @@ Player.prototype.setup = function () {
     this.sprite.body.drag.set(0.2);
     this.sprite.body.maxVelocity.setTo(400, 400);
     this.sprite.body.collideWorldBounds = true;
+
+    this.game.camera.follow(_this.player.sprite);
+    this.cursors = this.game.input.keyboard.createCursorKeys();
 };
 
 /**
@@ -63,22 +66,22 @@ Player.prototype.still = function () {
 /**
  * Updates the player.
  */
-Player.prototype.update = function (cursors) {
-    var isMoving = cursors.left.isDown || cursors.right.isDown || cursors.up.isDown || cursors.down.isDown;
+Player.prototype.update = function () {
+    var isMoving = this.cursors.left.isDown || this.cursors.right.isDown || this.cursors.up.isDown || this.cursors.down.isDown;
 
-    if (cursors.left.isDown) {
+    if (this.cursors.left.isDown) {
         this.moveLeft();
     }
 
-    if (cursors.right.isDown) {
+    if (this.cursors.right.isDown) {
         this.moveRight();
     }
 
-    if (cursors.up.isDown) {
+    if (this.cursors.up.isDown) {
         this.moveUp();
     }
 
-    if (cursors.down.isDown) {
+    if (this.cursors.down.isDown) {
         this.moveDown();
     }
 
