@@ -1,5 +1,6 @@
 var Phaser = require('./phaser'),
-    Player = require('./core/player');
+    Player = require('./core/player'),
+    Server = require('./server/server');
 
 var erik = {
     load: function () {
@@ -12,6 +13,7 @@ var erik = {
     },
 
     create: function () {
+        this.server = new Server();
         //  We're going to be using physics, so enable the Arcade Physics system
         this.game.physics.startSystem(Phaser.Physics.ARCADE);
 
@@ -28,6 +30,7 @@ var erik = {
 
     update: function () {
         this.player.update(this.cursors);
+        this.server.update(this.player);
     }
 }
 

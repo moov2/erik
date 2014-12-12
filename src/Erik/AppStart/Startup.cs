@@ -9,7 +9,7 @@ namespace Erik.AppStart
         public void Configuration(IAppBuilder app)
         {
             app
-                .MapHubs(new HubConfiguration { EnableCrossDomain = true })
+                .MapSignalR()
                 .UseNancy((options) =>
                 {
 
