@@ -21,5 +21,15 @@ module.exports = {
      */
     PLAYER_MAX_VELOCITY: 150,
     PLAYER_MOVEMENT_SPEED: 150,
-    PLAYER_ROTATION_SPEED: 4
+    PLAYER_ROTATION_SPEED: 4,
+
+    /**
+    * Details needed to import tilemap
+    */
+    BACKGROUND_LAYER_NAME: 'Background',
+    BACKGROUND_COLLISION_TILES: [7, 8, 9, 10, 19, 20, 21, 22, 33, 34, 45, 46],
+    TERRAIN_LAYER_NAME: 'terrain assets',
+    TERRAIN_COLLISION_TILES: [0, 74]
+
+
 };

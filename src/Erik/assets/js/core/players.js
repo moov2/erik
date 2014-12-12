@@ -96,8 +96,8 @@ Players.prototype.removeByConnectionId = function (connectionId) {
 Players.prototype.update = function () {
     for (var i = 0; i < this.players.length; i++) {
         // sets up collision detection
-        this.level.game.physics.arcade.collide(this.players[i].sprite, this.level.layermain);
-        this.level.game.physics.arcade.collide(this.players[i].sprite, this.level.layersecondary);
+        this.level.game.physics.arcade.collide(this.players[i].sprite, this.level.background);
+        this.level.game.physics.arcade.collide(this.players[i].sprite, this.level.terrain);
 
         this.players[i].update();
     }

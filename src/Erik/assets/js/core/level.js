@@ -24,15 +24,15 @@ Level.prototype.create = function () {
     this.mymap.addTilesetImage('terrain-assets');    // ...which must also match the image filename (without the extension)
 
     // here we create layers which correspond to the layers from the tilemap
-    this.layermain = this.mymap.createLayer('Background');   // again, layer names must match that in the tilemap json file
-    this.layersecondary = this.mymap.createLayer('terrain assets');
+    this.background = this.mymap.createLayer(Config.BACKGROUND_LAYER_NAME);   // again, layer names must match that in the tilemap json file
+    this.terrain = this.mymap.createLayer(Config.TERRAIN_LAYER_NAME);
 
     // now we tell the tilemap that we want tiles in the Background layer to be collidable EXCEPT for the specified indexes
     // these indexes correspond to the tile position in the layer's tileset
     // so for example, in this case index 21 is just normal ground which we do want to be abel to walk on
     // anything NOT included in the exclusion array will be collidable I.e we can't walk through/over it
-    this.mymap.setCollisionByExclusion([7, 8, 9, 10, 19, 20, 21, 22, 33, 34, 45, 46], true, 'Background');
-    this.mymap.setCollisionByExclusion([0, 74], true, 'terrain assets');
+    this.mymap.setCollisionByExclusion(Config.BACKGROUND_COLLISION_TILES, true, Config.BACKGROUND_LAYER_NAME);
+    this.mymap.setCollisionByExclusion(Config.TERRAIN_COLLISION_TILES, true, Config.TERRAIN_LAYER_NAME);
 };
 
 /**
