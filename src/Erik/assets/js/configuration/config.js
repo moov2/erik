@@ -1,12 +1,13 @@
 module.exports = {
     /**
-     * The number of pixels a character moves when the arrow keys are pressed.
-     */
-    MOVEMENT_STEP: 4,
-
-    /**
      * Dimensions of the game.
      */
     CANVAS_HEIGHT: 600,
-    CANVAS_WIDTH: 800
+    CANVAS_WIDTH: 800,
+
+    /**
+     * The speed at which a player will move.
+     */
+    PLAYER_MOVEMENT_SPEED: 300,
+    PLAYER_ROTATION_SPEED: 4
 };

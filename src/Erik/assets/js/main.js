@@ -10,6 +10,6 @@ var erik = {
 
         this.level.setup(this.state);
     }
-}
+};
 
 erik.load();

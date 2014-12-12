@@ -23,7 +23,7 @@ Level.prototype.create = function () {
  */
 Level.prototype.preload = function () {
     this.game.load.image('backdrop', '/assets/images/test_world.png');
-    this.game.load.spritesheet('dude', '/assets/images/dude.png', 32, 48);
+    this.game.load.image('dude', '/assets/images/topdown-1-standing.png');
 };
 
 /**
