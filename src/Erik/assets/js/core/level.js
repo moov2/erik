@@ -1,4 +1,5 @@
-var Config = require('../configuration/config'),
+var Assets = require('../configuration/assets'),
+    Config = require('../configuration/config'),
     Phaser = require('../phaser');
 
 /**
@@ -22,8 +23,9 @@ Level.prototype.create = function () {
  * Loads all the assets in the game.
  */
 Level.prototype.preload = function () {
-    this.game.load.image('backdrop', '/assets/images/test_world.png');
-    this.game.load.image('dude', '/assets/images/topdown-1-standing.png');
+    for (var i = 0; i < Assets.length; i++) {
+        this.game.load[Assets[i].type](Assets[i].name, Assets[i].url);
+    }
 };
 
 /**
