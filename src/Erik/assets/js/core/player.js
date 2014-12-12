@@ -3,14 +3,15 @@ var Config = require('../Configuration/Config');
 /**
  *
  */
-function Player(sprite) {
-    this.sprite = sprite;
+function Player(game) {
+    this.game = game;
+    this.sprite = this.game.add.sprite(this.game.world.width / 2, this.game.world.height / 2, 'dude');
 
     this.setup();
 }
 
 /**
- * Moves the character up.
+ * Moves the character forwards.
  */
 Player.prototype.moveDown = function () {
     this.sprite.y += Config.MOVEMENT_STEP;
@@ -43,8 +44,11 @@ Player.prototype.moveUp = function () {
  * Sets up the player animations.
  */
 Player.prototype.setup = function () {
-    this.sprite.animations.add('left', [0, 1, 2, 3], 10, true);
-    this.sprite.animations.add('right', [5, 6, 7, 8], 10, true);
+    this.sprite.anchor.setTo(0.5, 0.5);
+    this.game.physics.enable(this.sprite, Phaser.Physics.ARCADE);
+    this.sprite.drag.set(0.2);
+    this.sprite.body.maxVelocity.setTo(400, 400);
+    this.sprite.body.collideWorldBounds = true;
 };
 
 /**

@@ -67,9 +67,17 @@
   <ItemGroup>
     <Content Include="assets\images\dude.png" />
     <Content Include="assets\images\test_world.png" />
+    <Content Include="assets\js\configuration\config.js" />
+    <Content Include="assets\js\core\player.js" />
+    <Content Include="assets\js\erik.js" />
     <Content Include="assets\js\main.js" />
     <Content Include="assets\js\phaser.js" />
     <Content Include="assets\js\vendor\phaser.min.js" />
+    <Content Include="assets\tilemaps\test1\tileset\grass-tiles-2-small.png" />
+    <Content Include="assets\tilemaps\test1\tileset\littleshrooms_0.png" />
+    <Content Include="assets\tilemaps\test1\tileset\qubodup-bush_0.png" />
+    <Content Include="assets\tilemaps\test1\tileset\qubodup-bush_berries_0.png" />
+    <Content Include="assets\tilemaps\test1\tileset\tree2-final.png" />
     <Content Include="robots.txt" />
     <Content Include="index.html" />
     <Content Include="Web.config">
@@ -84,6 +92,9 @@
   <ItemGroup>
     <Content Include="packages.config" />
     <Content Include="assets\Web.config" />
+    <Content Include="assets\tilemaps\test1\testing-a.json" />
+    <Content Include="assets\tilemaps\test1\tileset\desktop.ini" />
+    <Content Include="assets\tilemaps\test1\tileset\Thumbs.db" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

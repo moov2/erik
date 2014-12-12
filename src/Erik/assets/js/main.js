@@ -20,7 +20,7 @@ var erik = {
         this.game.add.sprite(0, 0, 'backdrop');
 
         // The player and its settings
-        this.player = new Player(this.game.add.sprite(this.game.world.width / 2, this.game.world.height / 2, 'dude'));
+        this.player = new Player(this.game);
 
         this.game.camera.follow(this.player.sprite);
         this.cursors = this.game.input.keyboard.createCursorKeys();
