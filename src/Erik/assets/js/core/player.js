@@ -116,8 +116,10 @@ Player.prototype.update = function () {
         this.accelerate();
     }
 
-    if (!this.cursors.isDown && (this.currentSpeed > 0)) {
-        this.currentSpeed -= 4;
+    if ((!this.cursors.isDown // if no cursor keys pressed
+        && !this.game.input.activePointer.isDown) // and mouse/touch not pressed
+        && (this.currentSpeed > 0)) { // and is moving...
+        this.currentSpeed -= 4; // then slow down
     }
 
     if (this.currentSpeed > 0) {
@@ -126,16 +128,13 @@ Player.prototype.update = function () {
         this.walk(false);
     }
 
-    //  If the sprite is > 8px away from the pointer then let's move to it
+    //  If the sprite is > 8px away from the pointer and that pointer (touch/mouse) is down then let's move towards it
     if (this.game.physics.arcade.distanceToPointer(this.sprite, this.game.input.activePointer) > 8
-        && this.game.input.activePointer.isDown) {// only when touching or mousedown (otherwise mouse is always active)
+        && this.game.input.activePointer.isDown) {
 
-        //  Make the object seek to the active pointer (mouse or touch).
-        this.game.physics.arcade.moveToPointer(this.sprite, Config.PLAYER_MOVEMENT_SPEED);
-    }
-    else {
-        //  Otherwise turn off velocity because we're close enough to the pointer
-        this.sprite.body.velocity.set(0);
+        this.currentSpeed = Config.PLAYER_MOVEMENT_SPEED;
+        //  Make the object seek to the active pointer (mouse or touch). TODO: make this rotate and move towards
+        this.game.physics.arcade.moveToPointer(this.sprite, this.currentSpeed);
     }
 
 };
