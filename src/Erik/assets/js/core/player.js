@@ -125,6 +125,19 @@ Player.prototype.update = function () {
     } else {
         this.walk(false);
     }
+
+    //  If the sprite is > 8px away from the pointer then let's move to it
+    if (this.game.physics.arcade.distanceToPointer(this.sprite, this.game.input.activePointer) > 8
+        && this.game.input.activePointer.isDown) {// only when touching or mousedown (otherwise mouse is always active)
+
+        //  Make the object seek to the active pointer (mouse or touch).
+        this.game.physics.arcade.moveToPointer(this.sprite, Config.PLAYER_MOVEMENT_SPEED);
+    }
+    else {
+        //  Otherwise turn off velocity because we're close enough to the pointer
+        this.sprite.body.velocity.set(0);
+    }
+
 };
 
 /**

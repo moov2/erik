@@ -105,7 +105,7 @@
     <Content Include="assets\js\vendor\phaser.js" />
     <Content Include="assets\js\vendor\phaser.min.js" />
     <Content Include="assets\tilemaps\terrain\terrain-assets.png" />
-    <Content Include="assets\tilemaps\terrain\winter-tiles-v5.png" />
+    <Content Include="assets\tilemaps\terrain\winter-tiles-v6.png" />
     <Content Include="robots.txt" />
     <Content Include="index.html" />
     <Content Include="Web.config">
