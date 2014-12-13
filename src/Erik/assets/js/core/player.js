@@ -54,6 +54,14 @@ Player.prototype.turnRight = function () {
 };
 
 /**
+* rotates character to a specified angle
+*/
+Player.prototype.rotateToAngle = function (angle) {
+    this.sprite.angle = angle;
+    this.isRequiresSync = true;
+}
+
+/**
  * Sets up the player animations.
  */
 Player.prototype.setup = function () {
@@ -133,8 +141,11 @@ Player.prototype.update = function () {
         && this.game.input.activePointer.isDown) {
 
         this.currentSpeed = Config.PLAYER_MOVEMENT_SPEED;
-        //  Make the object seek to the active pointer (mouse or touch). TODO: make this rotate and move towards
-        this.game.physics.arcade.moveToPointer(this.sprite, this.currentSpeed);
+        //  Make the object seek to the active pointer (mouse or touch).
+        // moveToPointer returns the angle in radians
+        // radToDeg converts radians into angle
+        var angle = this.game.math.radToDeg(this.game.physics.arcade.moveToPointer(this.sprite, this.currentSpeed));
+        this.rotateToAngle(angle);
     }
 
 };
