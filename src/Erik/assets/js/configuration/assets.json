@@ -1,10 +1,5 @@
 [
     {
-        "name": "backdrop",
-        "type": "image",
-        "url": "/assets/images/test_world.png"
-    },
-    {
         "name": "dude",
         "type": "spritesheet",
         "url": "/assets/images/walking.png",
