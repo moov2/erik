@@ -25,7 +25,9 @@ Level.prototype.create = function () {
 
     // here we create layers which correspond to the layers from the tilemap
     this.background = this.mymap.createLayer(Config.BACKGROUND_LAYER_NAME);   // again, layer names must match that in the tilemap json file
+    this.background.renderSettings.enableScrollDelta = false;
     this.terrain = this.mymap.createLayer(Config.TERRAIN_LAYER_NAME);
+    this.terrain.renderSettings.enableScrollDelta = false;
 
     // now we tell the tilemap that we want tiles in the Background layer to be collidable EXCEPT for the specified indexes
     // these indexes correspond to the tile position in the layer's tileset
