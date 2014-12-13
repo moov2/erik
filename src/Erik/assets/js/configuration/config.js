@@ -29,5 +29,12 @@ module.exports = {
     BACKGROUND_LAYER_NAME: 'Background',
     BACKGROUND_COLLISION_TILES: [7, 8, 9, 10, 19, 20, 21, 22, 33, 34, 45, 46],
     TERRAIN_LAYER_NAME: 'terrain assets',
-    TERRAIN_COLLISION_TILES: [0, 74]
+    TERRAIN_COLLISION_TILES: [0, 74],
+
+    /**
+    * Snowball config
+    */
+    SNOWBALL_CAPACITY: 10,
+    SNOWBALL_VELOCITY: 300,
+    SNOWBALL_FIRE_RATE: 500
 };

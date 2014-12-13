@@ -6,6 +6,10 @@
         "frameWidth": 32,
         "frameHeight": 32,
         "frames": 12
+    },{
+        "name": "snowball",
+        "type": "image",
+        "url": "/assets/images/snowball.png"
     },
     {
         "name": "iceworld",

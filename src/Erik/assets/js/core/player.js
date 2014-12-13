@@ -79,8 +79,26 @@ Player.prototype.setup = function () {
     this.sprite.animations.add('walk');
 
     if (this.isActive) {
+        // mechanism to control rate of fire
+        this.fireTime = 0;
+        //  Our snowballs group
+        this.snowballs = this.game.add.group();
+        this.snowballs.enableBody = true;
+        this.snowballs.physicsBodyType = Phaser.Physics.ARCADE;
+        // create seveal instances of our snowball sprite (limited by how many can be fired at a time)
+        this.snowballs.createMultiple(Config.SNOWBALL_CAPACITY, 'snowball');
+        // centre the anchor point so positioning will apply to middle of snowball
+        this.snowballs.setAll('anchor.x', 0.5);
+        this.snowballs.setAll('anchor.y', 0.5);
+        // kill sprite if it heads out of the world
+        this.snowballs.setAll('outOfBoundsKill', true);
+        // checks if still in world bounds each frame to facilitate kill above
+        this.snowballs.setAll('checkWorldBounds', true);
+
+
         this.game.camera.follow(this.sprite);
         this.cursors = this.game.input.keyboard.createCursorKeys();
+        this.fireButton = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
     }
 };
 
@@ -148,7 +166,33 @@ Player.prototype.update = function () {
         this.rotateToAngle(angle);
     }
 
+    //  Firing?
+    if (this.fireButton.isDown) {
+        this.fire();
+    }
+
 };
+
+/**
+* Shoots projectile (aka snowball)
+*/
+Player.prototype.fire = function () {
+    //  To avoid them being allowed to fire too fast we set a time limit
+    if (this.game.time.now > this.fireTime) {
+            //  Grab the first bullet we can from the pool (false means it can't already exist I.E isn't already being fired somewhere)
+            this.snowball = this.snowballs.getFirstExists(false);
+
+            // if one is available
+            if (this.snowball) {
+                // set it's start position to that of our player
+                this.snowball.reset(this.sprite.x, this.sprite.y);
+                // shoot the mother
+                this.game.physics.arcade.velocityFromRotation(this.sprite.rotation, Config.SNOWBALL_VELOCITY, this.snowball.body.velocity);
+                // set our fire delay to a time slightly in the future
+                this.fireTime = this.game.time.now + Config.SNOWBALL_FIRE_RATE;
+            }
+        }
+}
 
 /**
  * Turns on / off the walking animation dependending on the provided flag.
