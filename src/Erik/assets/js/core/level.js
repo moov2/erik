@@ -8,6 +8,20 @@ var Assets = require('../configuration/assets'),
 function Level() { }
 
 /**
+ * Calculates the width of the canvas element.
+ */
+Level.prototype.calculateWidth = function () {
+    return (window.innerWidth < Config.CANVAS_MAX_WIDTH) ? '100%' : Config.CANVAS_MAX_WIDTH;
+};
+
+/**
+ * Calculates the height of the canvas element.
+ */
+Level.prototype.calculateHeight = function () {
+    return (window.innerHeight < Config.CANVAS_MAX_HEIGHT) ? '100%' : Config.CANVAS_MAX_HEIGHT;
+};
+
+/**
  * Configures the level environment.
  */
 Level.prototype.create = function () {
@@ -48,11 +62,11 @@ Level.prototype.preload = function () {
             continue;
         }
 
-        if (Assets[i].type == 'tilemap') {            
+        if (Assets[i].type == 'tilemap') {
             this.game.load.tilemap(Assets[i].name, Assets[i].url, null, Phaser.Tilemap.TILED_JSON);
             continue;
         }
-        
+
         this.game.load[Assets[i].type](Assets[i].name, Assets[i].url);
     }
 };
@@ -61,7 +75,7 @@ Level.prototype.preload = function () {
  * Creates a new instance of a Phaser game.
  */
 Level.prototype.setup = function (gameStates) {
-    this.game = new Phaser.Game(Config.CANVAS_WIDTH, Config.CANVAS_HEIGHT, Phaser.AUTO, Config.DOM_ID, gameStates);
+    this.game = new Phaser.Game(this.calculateWidth(), this.calculateHeight(), Phaser.AUTO, Config.DOM_ID, gameStates);
 };
 
 

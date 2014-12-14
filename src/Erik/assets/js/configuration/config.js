@@ -2,8 +2,8 @@ module.exports = {
     /**
      * Dimensions of the game.
      */
-    CANVAS_HEIGHT: '100%',
-    CANVAS_WIDTH: '100%',
+    CANVAS_MAX_HEIGHT: 600,
+    CANVAS_MAX_WIDTH: 800,
 
     /**
      * Id of element in the DOM that the canvas should be placed into.
