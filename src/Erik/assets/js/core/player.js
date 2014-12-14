@@ -95,12 +95,38 @@ Player.prototype.setup = function () {
         // checks if still in world bounds each frame to facilitate kill above
         this.snowballs.setAll('checkWorldBounds', true);
 
-
+        // follow the player around the world
         this.game.camera.follow(this.sprite);
+        // setup cursor keys
         this.cursors = this.game.input.keyboard.createCursorKeys();
+        // shoot with space
         this.fireButton = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+        // or for mobile devices, an onscreen shoot button
+        this.shootButton = this.game.add.button(100, 400, 'shoot-button', this.fire, this);
+        this.shootButton.fixedToCamera = true;
+        this.shootButton.anchor.setTo(0.5, 0.5);
+        this.shootButton.cameraOffset.x = this.game.camera.width / 2;
+        this.shootButton.cameraOffset.y = this.game.camera.height - 100;
+        this.shootButton.events.onInputDown.add(this.disablePointerMove, this);
+        this.shootButton.events.onInputUp.add(this.enablePointerMove, this);
+        this.pointerMoveEnabled = true;
+        // lose the shoot button if keyboard present
+        this.game.input.keyboard.addCallbacks(this, this.hideButton);
     }
 };
+
+Player.prototype.hideButton = function () {
+    this.game.input.keyboard.onDownCallback = null;
+    this.shootButton.kill();
+}
+
+Player.prototype.disablePointerMove = function(){
+    this.pointerMoveEnabled = false;
+}
+
+Player.prototype.enablePointerMove = function(){
+    this.pointerMoveEnabled = true;
+}
 
 Player.prototype.movePlayer = function () {
     this.game.physics.arcade.velocityFromRotation(this.sprite.rotation, this.currentSpeed, this.sprite.body.velocity);
@@ -156,7 +182,8 @@ Player.prototype.update = function () {
 
     //  If the sprite is > 8px away from the pointer and that pointer (touch/mouse) is down then let's move towards it
     if (this.game.physics.arcade.distanceToPointer(this.sprite, this.game.input.activePointer) > 8
-        && this.game.input.activePointer.isDown) {
+        && this.game.input.activePointer.isDown
+        && this.pointerMoveEnabled) {
 
         this.currentSpeed = Config.PLAYER_MOVEMENT_SPEED;
         //  Make the object seek to the active pointer (mouse or touch).
@@ -176,7 +203,7 @@ Player.prototype.update = function () {
 /**
 * Shoots projectile (aka snowball)
 */
-Player.prototype.fire = function () {
+Player.prototype.fire = function (event) {
     //  To avoid them being allowed to fire too fast we set a time limit
     if (this.game.time.now > this.fireTime) {
             //  Grab the first bullet we can from the pool (false means it can't already exist I.E isn't already being fired somewhere)

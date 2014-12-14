@@ -88,6 +88,8 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="assets\images\shoot-button.png" />
+    <Content Include="assets\images\snowball.png" />
     <Content Include="assets\images\walking.png" />
     <Content Include="assets\js\configuration\config.js" />
     <Content Include="assets\js\core\gamestate.js" />

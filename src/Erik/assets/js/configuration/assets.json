@@ -25,5 +25,10 @@
         "name": "terrain-assets",
         "type": "image",
         "url": "/assets/tilemaps/terrain/terrain-assets.png"
+    },
+    {
+        "name": "shoot-button",
+        "type": "image",
+        "url": "/assets/images/shoot-button.png"
     }
 ]
