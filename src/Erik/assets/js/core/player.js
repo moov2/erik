@@ -103,20 +103,22 @@ Player.prototype.setup = function () {
         this.fireButton = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
         // or for mobile devices, an onscreen shoot button
         this.shootButton = this.game.add.button(100, 400, 'shoot-button', this.fire, this);
+        // keep the button always visible
         this.shootButton.fixedToCamera = true;
-        this.shootButton.anchor.setTo(0.5, 0.5);
-        this.shootButton.cameraOffset.x = this.game.camera.width / 2;
-        this.shootButton.cameraOffset.y = this.game.camera.height - 100;
+        // position button
+        this.shootButton.anchor.setTo(0.5, 1); // use middle and bottom of button to position
+        this.shootButton.cameraOffset.x = this.game.camera.width / 2; // centre of screen
+        this.shootButton.cameraOffset.y = this.game.camera.height -5; // bottom of screen
+        // prevent button presses from moving player
+        this.pointerMoveEnabled = true;
         this.shootButton.events.onInputDown.add(this.disablePointerMove, this);
         this.shootButton.events.onInputUp.add(this.enablePointerMove, this);
-        this.pointerMoveEnabled = true;
         // lose the shoot button if keyboard present
         this.game.input.keyboard.addCallbacks(this, this.hideButton);
     }
 };
 
 Player.prototype.hideButton = function () {
-    this.game.input.keyboard.onDownCallback = null;
     this.shootButton.kill();
 }
 
