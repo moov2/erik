@@ -88,6 +88,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="assets\css\styles.css" />
     <Content Include="assets\images\shoot-button.png" />
     <Content Include="assets\images\snowball.png" />
     <Content Include="assets\images\walking.png" />
@@ -136,12 +137,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="assets\css\base\" />
-    <Folder Include="assets\css\generic\" />
-    <Folder Include="assets\css\helpers\" />
-    <Folder Include="assets\css\vendor\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
